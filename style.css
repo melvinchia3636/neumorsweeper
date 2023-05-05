@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Rubik", sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.square {
+  @apply flex items-center justify-center text-center text-lg font-semibold cursor-pointer select-none;
+  border-radius: 6px;
+  background: linear-gradient(145deg, #ffffff, #64748b22);
+  box-shadow: 2px 2px 4px #dbdfe3, -2px -2px 4px #ffffff;
+}
+
+.dark .square {
+  background: linear-gradient(145deg, #43434b, #262626);
+  box-shadow: 2px 2px 4px #36363c66, -2px -2px 4px #48485166;
+}
+
+.square.flag:before {
+  @apply text-rose-400;
+}
+
+.square.mine:not(.flag) {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1.4em' height='1.4em' viewBox='0 0 24 24' %3E%3Cpath fill='%2364748b' d='M23 13v-2h-3.07a7.988 7.988 0 0 0-1.62-3.9l2.19-2.17l-1.43-1.43l-2.17 2.19A7.988 7.988 0 0 0 13 4.07V1h-2v3.07c-1.42.18-2.77.74-3.9 1.62L4.93 3.5L3.5 4.93L5.69 7.1A7.988 7.988 0 0 0 4.07 11H1v2h3.07c.18 1.42.74 2.77 1.62 3.9L3.5 19.07l1.43 1.43l2.17-2.19c1.13.88 2.48 1.44 3.9 1.62V23h2v-3.07c1.42-.18 2.77-.74 3.9-1.62l2.17 2.19l1.43-1.43l-2.19-2.17a7.988 7.988 0 0 0 1.62-3.9H23M12 8a4 4 0 0 0-4 4H6a6 6 0 0 1 6-6v2Z' /%3E%3C/svg%3E")
+      no-repeat 50% 50%,
+    linear-gradient(145deg, #ffffff, #64748b22) !important;
+  color: #fff;
+}
+
+.dark .square.mine:not(.flag) {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1.4em' height='1.4em' viewBox='0 0 24 24' %3E%3Cpath fill='%23d4d4d8' d='M23 13v-2h-3.07a7.988 7.988 0 0 0-1.62-3.9l2.19-2.17l-1.43-1.43l-2.17 2.19A7.988 7.988 0 0 0 13 4.07V1h-2v3.07c-1.42.18-2.77.74-3.9 1.62L4.93 3.5L3.5 4.93L5.69 7.1A7.988 7.988 0 0 0 4.07 11H1v2h3.07c.18 1.42.74 2.77 1.62 3.9L3.5 19.07l1.43 1.43l2.17-2.19c1.13.88 2.48 1.44 3.9 1.62V23h2v-3.07c1.42-.18 2.77-.74 3.9-1.62l2.17 2.19l1.43-1.43l-2.19-2.17a7.988 7.988 0 0 0 1.62-3.9H23M12 8a4 4 0 0 0-4 4H6a6 6 0 0 1 6-6v2Z' /%3E%3C/svg%3E")
+      no-repeat 50% 50%,
+    linear-gradient(145deg, #43434bff, #262626ff) !important;
+}
+
+.square.revealed {
+  border-radius: 6px;
+  background: none;
+  background-color: #f1f5f9 !important;
+  box-shadow: inset 4px 4px 6px #64748b30, inset -4px -4px 6px #ffffff;
+}
+
+.dark .square.revealed {
+  background: none;
+  background-color: rgb(39 39 42) !important;
+  box-shadow: inset 2px 2px 4px #212124, inset -2px -2px 4px #2d2d30;
+}
+
+.message {
+  @apply -top-full transition-all duration-500;
+}
+
+.message.visible {
+  @apply top-4;
+}
+
+.adjacent-mine-2 {
+  @apply text-green-500;
+}
+
+.adjacent-mine-3 {
+  @apply text-yellow-500;
+}
+
+.adjacent-mine-4 {
+  @apply text-orange-400;
+}
+
+.adjacent-mine-5 {
+  @apply text-red-500;
+}
+
+.adjacent-mine-6 {
+  @apply text-rose-600;
+}
+
+.adjacent-mine-7 {
+  @apply text-rose-900;
+}
+
+.adjacent-mine-8 {
+  @apply text-yellow-950;
+}
+
+.mine-left-counter {
+  @apply w-1/2 h-16 p-1 rounded-lg flex items-center px-5 gap-2 text-xl;
+  background: #f1f5f9;
+  box-shadow: inset 4px 4px 6px #64748b30, inset -4px -4px 6px #ffffff;
+}
+
+.dark .mine-left-counter {
+  background: #27272a;
+  box-shadow: inset 4px 4px 6px #212124, inset -4px -4px 6px #2d2d30;
+}
+
+.mine-left-counter * {
+  font-family: "DSEG7 Classic Mini", sans-serif;
+}
+
+.icon:before {
+  @apply text-slate-500;
+}
+
+.dark .icon:before {
+  @apply text-zinc-100;
+}
+
+.game button {
+  @apply bg-slate-100 w-full py-4 uppercase font-semibold tracking-wider rounded-md;
+  transition: 0.2s ease-in-out;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
+    -6px -6px 10px rgba(255, 255, 255, 0.5),
+    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+}
+.game button:hover {
+  box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6),
+    -2px -2px 4px rgba(255, 255, 255, 0.4),
+    2px 2px 2px rgba(255, 255, 255, 0.05), 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.game button:active {
+  box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.7),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.5),
+    inset 2px 2px 2px rgba(255, 255, 255, 0.075),
+    inset 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#settings_modal {
+  @apply w-1/2 h-1/2 fixed top-1/2 -left-full -translate-x-1/2 -translate-y-1/2 bg-slate-100 dark:bg-zinc-800 rounded-lg;
+  box-shadow: 20px 20px 60px #64748b30, -20px -20px 60px #ffffff;
+  transition: 0.5s ease-in-out;
+}
+
+.dark #settings_modal {
+  @apply shadow-2xl;
+}
+
+#settings_modal.visible {
+  @apply left-1/2;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' role='img' width='24' height='24' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'%3E%3Cpath fill='%2364748b' d='m11.3 14.3l-2.6-2.6q-.475-.475-.212-1.087T9.425 10h5.15q.675 0 .938.613T15.3 11.7l-2.6 2.6q-.15.15-.325.225T12 14.6q-.2 0-.375-.075T11.3 14.3Z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position-x: 98%;
+  background-position-y: 8px;
+}

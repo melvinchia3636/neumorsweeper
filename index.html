@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body class="text-slate-500 dark:text-zinc-300 w-full h-screen">
+    <div
+      class="header w-full fixed top-0 left-0 p-6 flex items-center justify-between"
+    >
+      <h1 class="flex items-center gap-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="2.6em"
+          height="2.6em"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M23 13v-2h-3.07a7.988 7.988 0 0 0-1.62-3.9l2.19-2.17l-1.43-1.43l-2.17 2.19A7.988 7.988 0 0 0 13 4.07V1h-2v3.07c-1.42.18-2.77.74-3.9 1.62L4.93 3.5L3.5 4.93L5.69 7.1A7.988 7.988 0 0 0 4.07 11H1v2h3.07c.18 1.42.74 2.77 1.62 3.9L3.5 19.07l1.43 1.43l2.17-2.19c1.13.88 2.48 1.44 3.9 1.62V23h2v-3.07c1.42-.18 2.77-.74 3.9-1.62l2.17 2.19l1.43-1.43l-2.19-2.17a7.988 7.988 0 0 0 1.62-3.9H23M12 8a4 4 0 0 0-4 4H6a6 6 0 0 1 6-6v2Z"
+          />
+        </svg>
+        <div class="flex flex-col">
+          <span class="text-lg">Neumorsweeper</span>
+          <span class="text-xs -mt-1">Neumorphic Minesweeper</span>
+        </div>
+      </h1>
+      <div class="flex items-center gap-2">
+        <button class="p-4" id="settings_button">
+          <span class="mgc_settings_1_fill icon text-xl"></span>
+        </button>
+        <button class="p-4">
+          <span class="mgc_github_fill icon text-xl"></span>
+        </button>
+      </div>
+    </div>
+    <div
+      class="game w-full h-screen flex flex-col items-center bg-slate-100 dark:bg-zinc-900 transition-color duration-500 py-32"
+    >
+      <div
+        class="game-board-wrapper flex flex-col items-center gap-4"
+      >
+        <div class="game-stats w-full flex gap-4 justify-between h-full">
+          <div class="mine-left-counter">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.3em"
+              height="1.3em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M23 13v-2h-3.07a7.988 7.988 0 0 0-1.62-3.9l2.19-2.17l-1.43-1.43l-2.17 2.19A7.988 7.988 0 0 0 13 4.07V1h-2v3.07c-1.42.18-2.77.74-3.9 1.62L4.93 3.5L3.5 4.93L5.69 7.1A7.988 7.988 0 0 0 4.07 11H1v2h3.07c.18 1.42.74 2.77 1.62 3.9L3.5 19.07l1.43 1.43l2.17-2.19c1.13.88 2.48 1.44 3.9 1.62V23h2v-3.07c1.42-.18 2.77-.74 3.9-1.62l2.17 2.19l1.43-1.43l-2.19-2.17a7.988 7.988 0 0 0 1.62-3.9H23M12 8a4 4 0 0 0-4 4H6a6 6 0 0 1 6-6v2Z"
+              />
+            </svg>
+            <div class="mine-left-count relative isolate">
+              <span class="absolute top-0 left-0 text-slate-300/60 dark:text-zinc-400/20 z-[-1]"
+                >88</span
+              >
+              <span id="unflagged_mines_counter">10</span>
+            </div>
+          </div>
+          <div class="mine-left-counter">
+            <span class="icon mgc_alarm_2_line text-2xl -mt-0.5"></span>
+            <div class="mine-left-count relative isolate">
+              <span class="absolute top-0 left-0 text-slate-300/60 dark:text-zinc-400/20 z-[-1]"
+                >88:88:88</span
+              >
+              <span id="timer">00:00:00</span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="board grid grid-cols-[repeat(10,40px)] grid-rows-[repeat(10,40px)] gap-2"
+        ></div>
+      </div>
+    </div>
+    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 text-sm text-center">
+      Made with ❤️ by
+      <a href="https://thecodeblog.net" class="underline decoration-[1.5px]"
+        >Melvin Chia</a
+      >. Project under MIT License.
+    </div>
+    <div id="settings_modal" class="flex flex-col gap-4 p-8">
+      <div class="w-full flex items-center justify-between">
+        <h2 class="flex gap-4 items-center">
+          <span class="mgc_settings_1_fill icon text-3xl"></span>
+          <div class="flex flex-col">
+            <span class="text-lg">Settings</span>
+            <span class="text-xs -mt-1">Customize your game</span>
+          </div>
+        </h2>
+        <button id="settings_close_button" class="p-4">
+          <span class="mgc_close_fill icon text-xl"></span>
+        </button>
+      </div>
+      <div class="mt-8 divide-y divide-slate-200 dark:divide-zinc-700">
+        <div class="flex items-center justify-between py-4 px-2">
+          <div>
+            <h3>Dark theme</h3>
+            <p class="text-xs text-slate-400 dark:text-zinc-500">Enable dark theme for the game</p>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="dark_theme_toggle" value="" class="sr-only peer" />
+            <div
+              class="w-11 h-6 bg-slate-500 peer-focus:outline-none rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-zinc-700"
+            ></div>
+          </label>
+        </div>
+        <div class="flex items-center justify-between py-4 px-2">
+          <div>
+            <h3>Difficulty</h3>
+            <p class="text-xs text-slate-400 dark:text-zinc-500">
+              Customize the board size and mine count
+            </p>
+          </div>
+          <select
+            id="countries"
+            class="w-64 bg-slate-100 border-[1.5px] border-slate-300 text-sm rounded-lg focus:border-slate-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-slate-400 dark:text-white dark:focus:border-slate-500 appearance-none"
+          >
+            <option selected>Easy (10 x 10, 10 mines)</option>
+            <option value="US">Medium (13 x 15, 40 mines)</option>
+            <option value="CA">Hard (16 x 30, 99 mines)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div
+        id="toast-default"
+        class="flex items-center w-full max-w-xs p-4 bg-slate-50 rounded-lg dark:bg-zinc-800 shadow-lg fixed left-1/2 -translate-x-1/2 message"
+        role="alert"
+      >
+        <div
+          class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-slate-500 bg-slate-200/50 rounded-lg dark:bg-zinc-700/50 dark:text-slate-200"
+        >
+          <span class="-mt-1 emoji"></span>
+        </div>
+        <div class="ml-3 text-sm font-normal content"></div>
+        <button
+          type="button"
+          class="ml-auto -mx-1.5 -my-1.5 bg-slate-50 rounded-lg p-1.5 hover:bg-slate-100 inline-flex h-8 w-8 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+          id="message_close_button"
+        >
+          <span class="sr-only">Close</span>
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

@@ -27,23 +27,29 @@
           <span class="text-xs -mt-1">Neumorphic Minesweeper</span>
         </div>
       </h1>
-      <div class="flex items-center gap-2">
-        <button class="p-4" id="settings_button">
-          <span class="mgc_settings_1_fill icon text-xl"></span>
+      <div class="flex items-center gap-4">
+        <button
+          class="p-4 nav-btn rounded-lg duration-200"
+          id="settings_button"
+        >
+          <span class="mgc_settings_1_line icon text-xl"></span>
         </button>
-        <button class="p-4">
-          <span class="mgc_github_fill icon text-xl"></span>
+        <button class="p-4 nav-btn rounded-lg duration-200">
+          <span class="mgc_openai_line icon text-xl"></span>
+        </button>
+        <button class="p-4 nav-btn rounded-lg duration-200">
+          <span class="mgc_github_line icon text-xl"></span>
         </button>
       </div>
     </div>
     <div
       class="game w-full h-screen flex flex-col items-center bg-slate-100 dark:bg-zinc-900 transition-color duration-500 py-32"
     >
-      <div
-        class="game-board-wrapper flex flex-col items-center gap-4"
-      >
+      <div class="game-board-wrapper flex flex-col items-center gap-4">
         <div class="game-stats w-full flex gap-4 justify-between h-full">
-          <div class="mine-left-counter w-1/2 h-16 p-1 rounded-lg flex items-center px-5 gap-2 text-xl">
+          <div
+            class="mine-left-counter w-1/2 h-16 p-1 rounded-lg flex items-center px-5 gap-2 text-xl"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1.3em"
@@ -56,16 +62,20 @@
               />
             </svg>
             <div class="mine-left-count relative isolate">
-              <span class="absolute top-0 left-0 text-slate-300/60 dark:text-zinc-400/20 z-[-1]"
+              <span
+                class="absolute top-0 left-0 text-slate-300/60 dark:text-zinc-400/20 z-[-1]"
                 >88</span
               >
               <span id="unflagged_mines_counter">10</span>
             </div>
           </div>
-          <div class="mine-left-counter w-1/2 h-16 p-1 rounded-lg flex items-center px-5 gap-2 text-xl">
+          <div
+            class="mine-left-counter w-1/2 h-16 p-1 rounded-lg flex items-center px-5 gap-2 text-xl"
+          >
             <span class="icon mgc_alarm_2_line text-2xl -mt-0.5"></span>
             <div class="mine-left-count relative isolate">
-              <span class="absolute top-0 left-0 text-slate-300/60 dark:text-zinc-400/20 z-[-1]"
+              <span
+                class="absolute top-0 left-0 text-slate-300/60 dark:text-zinc-400/20 z-[-1]"
                 >88:88:88</span
               >
               <span id="timer">00:00:00</span>
@@ -73,61 +83,79 @@
           </div>
         </div>
         <div
-          class="board grid grid-cols-[repeat(10,40px)] grid-rows-[repeat(10,40px)] gap-2"
-        ></div>
-      </div>
-    </div>
-    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 text-sm text-center">
-      Made with ❤️ by
-      <a href="https://thecodeblog.net" class="underline decoration-[1.5px]"
-        >Melvin Chia</a
-      >. Project under MIT License.
-    </div>
-    <div id="settings_modal" class="flex flex-col gap-4 p-8">
-      <div class="w-full flex items-center justify-between">
-        <h2 class="flex gap-4 items-center">
-          <span class="mgc_settings_1_fill icon text-3xl"></span>
-          <div class="flex flex-col">
-            <span class="text-lg">Settings</span>
-            <span class="text-xs -mt-1">Customize your game</span>
-          </div>
-        </h2>
-        <button id="settings_close_button" class="p-4">
-          <span class="mgc_close_fill icon text-xl"></span>
-        </button>
-      </div>
-      <div class="mt-8 divide-y divide-slate-200 dark:divide-zinc-700">
-        <div class="flex items-center justify-between py-4 px-2">
-          <div>
-            <h3>Dark theme</h3>
-            <p class="text-xs text-slate-400 dark:text-zinc-500">Enable dark theme for the game</p>
-          </div>
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="dark_theme_toggle" value="" class="sr-only peer" />
-            <div
-              class="w-11 h-6 bg-slate-500 peer-focus:outline-none rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-zinc-700"
-            ></div>
-          </label>
-        </div>
-        <div class="flex items-center justify-between py-4 px-2">
-          <div>
-            <h3>Difficulty</h3>
-            <p class="text-xs text-slate-400 dark:text-zinc-500">
-              Customize the board size and mine count
-            </p>
-          </div>
-          <select
-            id="countries"
-            class="w-64 bg-slate-100 border-[1.5px] border-slate-300 text-sm rounded-lg focus:border-slate-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-slate-400 dark:text-white dark:focus:border-slate-500 appearance-none"
+          class="board grid grid-cols-[repeat(10,40px)] grid-rows-[repeat(10,40px)] gap-2 relative"
+        >
+          <div
+            class="hidden game-over absolute top-0 left-0 w-full h-full bg-slate-100 dark:bg-zinc-900 rounded-md items-center justify-center transition-opacity delay-75 duration-500 opacity-0"
+            id="game_over_container"
           >
-            <option selected>Easy (10 x 10, 10 mines)</option>
-            <option value="US">Medium (13 x 15, 40 mines)</option>
-            <option value="CA">Hard (16 x 30, 99 mines)</option>
-          </select>
+            <div class="flex flex-col items-center gap-8">
+              <span class="text-3xl" id="msg"></span>
+              <button class="btn transition-all" id="restart_button">
+                Play Again
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div
+      <div class="fixed bottom-4 left-1/2 -translate-x-1/2 text-sm text-center">
+        Made with ❤️ by
+        <a href="https://thecodeblog.net" class="underline decoration-[1.5px]"
+          >Melvin Chia</a
+        >. Project under MIT License.
+      </div>
+      <div id="settings_modal" class="flex flex-col gap-4 p-8">
+        <div class="w-full flex items-center justify-between">
+          <h2 class="flex gap-4 items-center">
+            <span class="mgc_settings_1_fill icon text-3xl"></span>
+            <div class="flex flex-col">
+              <span class="text-lg">Settings</span>
+              <span class="text-xs -mt-1">Customize your game</span>
+            </div>
+          </h2>
+          <button id="settings_close_button" class="p-4">
+            <span class="mgc_close_fill icon text-xl"></span>
+          </button>
+        </div>
+        <div class="mt-8 divide-y divide-slate-200 dark:divide-zinc-700">
+          <div class="flex items-center justify-between py-4 px-2">
+            <div>
+              <h3>Dark theme</h3>
+              <p class="text-xs text-slate-400 dark:text-zinc-500">
+                Enable dark theme for the game
+              </p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                id="dark_theme_toggle"
+                value=""
+                class="sr-only peer"
+              />
+              <div
+                class="w-11 h-6 bg-slate-500 peer-focus:outline-none rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-zinc-700"
+              ></div>
+            </label>
+          </div>
+          <div class="flex items-center justify-between py-4 px-2">
+            <div>
+              <h3>Difficulty</h3>
+              <p class="text-xs text-slate-400 dark:text-zinc-500">
+                Customize the board size and mine count
+              </p>
+            </div>
+            <select
+              id="countries"
+              class="w-64 bg-slate-100 border-[1.5px] border-slate-300 text-sm rounded-lg focus:border-slate-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-slate-400 dark:text-white dark:focus:border-slate-500 appearance-none"
+            >
+              <option selected>Easy (10 x 10, 10 mines)</option>
+              <option value="US">Medium (13 x 15, 40 mines)</option>
+              <option value="CA">Hard (16 x 30, 99 mines)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div
         id="toast-default"
         class="flex items-center w-full max-w-xs p-4 bg-slate-50 rounded-lg dark:bg-zinc-800 shadow-lg fixed left-1/2 -translate-x-1/2 message"
         role="alert"

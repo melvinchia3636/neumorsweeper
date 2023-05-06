@@ -137,7 +137,11 @@ class Settings {
   }
 
   updateDOMTheme() {
-    document.querySelector("html").classList.toggle("dark");
+    if (this.theme === "light") {
+      document.querySelector("html").classList.remove("dark");
+    } else {
+      document.querySelector("html").classList.add("dark");
+    }
   }
 
   toggleTheme(theme) {
@@ -174,18 +178,45 @@ class Minesweeper {
     this.SETTINGS_CLOSE_BTN = document.getElementById("settings_close_button");
     this.MESSAGE_CLOSE_BTN = document.getElementById("message_close_button");
     this.MESSAGE = document.querySelector(".message");
+    this.RESTART_BTN = document.getElementById("restart_button");
+    this.GAME_OVER_CONTAINER = document.getElementById("game_over_container");
 
     this.settings = new Settings(this);
 
     this.initializeGame();
   }
 
-  initializeGame() {
+  initializeGame(isFirstGame = true) {
     this.createGameBoard();
     this.addMinesToGameBoard();
     this.calculateNeighbourMineCounts();
     this.addEventListenersToSquares();
-    this.addEventListenersToMisc();
+    if (isFirstGame) this.addEventListenersToMisc();
+  }
+
+  restartGame() {
+    this.gameBoard = [];
+    this.timerStart = false;
+    this.timerInstance = null;
+    this.minesRemaining = this.numMines;
+    this.TIMER.textContent = "00:00:00";
+    this.UNFLAGGED_MINES_COUNTER.textContent = (
+      Math.max(this.numMines - 0, 0) + ""
+    ).padStart(2, "0");
+    this.GAME_BOARD.querySelectorAll(".square").forEach((square) =>
+      square.remove()
+    );
+    this.GAME_OVER_CONTAINER.classList.remove("opacity-100");
+    this.GAME_OVER_CONTAINER.classList.add("opacity-0");
+
+    this.MESSAGE.classList.remove("visible");
+
+    setTimeout(() => {
+      this.GAME_OVER_CONTAINER.classList.remove("flex");
+      this.GAME_OVER_CONTAINER.classList.add("hidden");
+    }, 500);
+
+    this.initializeGame(false);
   }
 
   startTimer() {
@@ -215,12 +246,25 @@ class Minesweeper {
     });
     this.disableBoard();
     clearInterval(this.timerInstance);
+
     setTimeout(() => {
       this.MESSAGE.querySelector(".emoji").textContent = hasWin ? "=)" : ";-;";
       this.MESSAGE.querySelector(".content").textContent = hasWin
         ? "Yay, you win the game!"
         : "Sad, you lose the game.";
+
       this.MESSAGE.classList.add("visible");
+
+      this.GAME_OVER_CONTAINER.querySelector("#msg").textContent = hasWin
+        ? "Yay! =)"
+        : "Sad. ;-;";
+      this.GAME_OVER_CONTAINER.classList.remove("hidden");
+      this.GAME_OVER_CONTAINER.classList.add("flex");
+
+      setTimeout(() => {
+        this.GAME_OVER_CONTAINER.classList.remove("opacity-0");
+        this.GAME_OVER_CONTAINER.classList.add("opacity-100");
+      }, 100);
     }, 500);
   }
 
@@ -303,6 +347,8 @@ class Minesweeper {
       const message = document.querySelector(".message");
       message.classList.remove("visible");
     });
+
+    this.RESTART_BTN.addEventListener("click", this.restartGame.bind(this));
   }
 
   handleLeftClick(event) {

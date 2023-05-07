@@ -2,9 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1.4em' height='1.4em' viewBox='0 0 24 24' %3E%3Cpath fill='%23d4d4d8' d='M23 13v-2h-3.07a7.988 7.988 0 0 0-1.62-3.9l2.19-2.17l-1.43-1.43l-2.17 2.19A7.988 7.988 0 0 0 13 4.07V1h-2v3.07c-1.42.18-2.77.74-3.9 1.62L4.93 3.5L3.5 4.93L5.69 7.1A7.988 7.988 0 0 0 4.07 11H1v2h3.07c.18 1.42.74 2.77 1.62 3.9L3.5 19.07l1.43 1.43l2.17-2.19c1.13.88 2.48 1.44 3.9 1.62V23h2v-3.07c1.42-.18 2.77-.74 3.9-1.62l2.17 2.19l1.43-1.43l-2.19-2.17a7.988 7.988 0 0 0 1.62-3.9H23M12 8a4 4 0 0 0-4 4H6a6 6 0 0 1 6-6v2Z' /%3E%3C/svg%3E"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Neumorsweeper - Neumorphic Minesweeper</title>
   </head>
   <body class="text-slate-500 dark:text-zinc-300 w-full h-screen">
     <div
@@ -22,7 +26,7 @@
             d="M23 13v-2h-3.07a7.988 7.988 0 0 0-1.62-3.9l2.19-2.17l-1.43-1.43l-2.17 2.19A7.988 7.988 0 0 0 13 4.07V1h-2v3.07c-1.42.18-2.77.74-3.9 1.62L4.93 3.5L3.5 4.93L5.69 7.1A7.988 7.988 0 0 0 4.07 11H1v2h3.07c.18 1.42.74 2.77 1.62 3.9L3.5 19.07l1.43 1.43l2.17-2.19c1.13.88 2.48 1.44 3.9 1.62V23h2v-3.07c1.42-.18 2.77-.74 3.9-1.62l2.17 2.19l1.43-1.43l-2.19-2.17a7.988 7.988 0 0 0 1.62-3.9H23M12 8a4 4 0 0 0-4 4H6a6 6 0 0 1 6-6v2Z"
           />
         </svg>
-        <div class="flex flex-col">
+        <div class="hidden [@media(min-width:466px)]:flex flex-col">
           <span class="text-lg">Neumorsweeper</span>
           <span class="text-xs -mt-1">Neumorphic Minesweeper</span>
         </div>
@@ -34,18 +38,27 @@
         >
           <span class="mgc_settings_1_line icon text-xl"></span>
         </button>
-        <button class="p-4 nav-btn rounded-lg duration-200">
+        <button
+          class="p-4 nav-btn rounded-lg duration-200"
+          id="chat_gpt_button"
+        >
           <span class="mgc_openai_line icon text-xl"></span>
         </button>
-        <button class="p-4 nav-btn rounded-lg duration-200">
-          <span class="mgc_github_line icon text-xl"></span>
-        </button>
+        <a
+          href="https://github.com/melvinchia3636/neumorsweeper"
+          rel="noopener noreferrer"
+          target="_blank"
+          ><button class="p-4 nav-btn rounded-lg duration-200">
+            <span class="mgc_github_line icon text-xl"></span></button
+        ></a>
       </div>
     </div>
     <div
-      class="game w-full h-screen flex flex-col items-center bg-slate-100 dark:bg-zinc-900 transition-color duration-500 py-32"
+      class="game w-full h-screen flex flex-col items-center justify-center bg-slate-100 dark:bg-zinc-900 transition-color duration-500"
     >
-      <div class="game-board-wrapper flex flex-col items-center gap-4">
+      <div
+        class="game-board-wrapper flex flex-col items-center gap-4 scale-[60%] [@media(min-width:380px)]:scale-[70%] [@media(min-width:440px)]:scale-[80%] [@media(min-width:510px)]:scale-[90%] [@media(min-width:640px)]:scale-100"
+      >
         <div class="game-stats w-full flex gap-4 justify-between h-full">
           <div
             class="mine-left-counter w-1/2 h-16 p-1 rounded-lg flex items-center px-5 gap-2 text-xl"
@@ -82,9 +95,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="board grid grid-cols-[repeat(10,40px)] grid-rows-[repeat(10,40px)] gap-2 relative"
-        >
+        <div class="board grid relative">
           <div
             class="hidden game-over absolute top-0 left-0 w-full h-full bg-slate-100 dark:bg-zinc-900 rounded-md items-center justify-center transition-opacity delay-75 duration-500 opacity-0"
             id="game_over_container"
@@ -98,15 +109,20 @@
           </div>
         </div>
       </div>
-      <div class="fixed bottom-4 left-1/2 -translate-x-1/2 text-sm text-center">
+      <div
+        class="fixed bottom-4 left-1/2 -translate-x-1/2 text-sm text-center w-full px-12"
+      >
         Made with ❤️ by
         <a href="https://thecodeblog.net" class="underline decoration-[1.5px]"
           >Melvin Chia</a
         >. Project under MIT License.
       </div>
-      <div id="settings_modal" class="flex flex-col gap-4 p-8">
+      <div
+        id="settings_modal"
+        class="modal flex flex-col gap-4 p-4 sm:p-8 w-3/4 xl:w-1/2 fixed top-1/2 -left-full -translate-x-1/2 shadow-2xl -translate-y-1/2 dark:bg-zinc-800 rounded-xl"
+      >
         <div class="w-full flex items-center justify-between">
-          <h2 class="flex gap-4 items-center">
+          <h2 class="flex gap-2 sm:gap-4 items-center">
             <span class="mgc_settings_1_fill icon text-3xl"></span>
             <div class="flex flex-col">
               <span class="text-lg">Settings</span>
@@ -117,43 +133,64 @@
             <span class="mgc_close_fill icon text-xl"></span>
           </button>
         </div>
-        <div class="mt-8 divide-y divide-slate-200 dark:divide-zinc-700">
-          <div class="flex items-center justify-between py-4 px-2">
+        <div
+          class="mt-8 divide-y divide-slate-200 dark:divide-zinc-700 flex flex-col"
+        >
+          <div class="flex items-center justify-between py-4 px-2 gap-4">
             <div>
               <h3>Dark theme</h3>
               <p class="text-xs text-slate-400 dark:text-zinc-500">
                 Enable dark theme for the game
               </p>
             </div>
-            <label class="relative inline-flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                id="dark_theme_toggle"
-                value=""
-                class="sr-only peer"
-              />
-              <div
-                class="w-11 h-6 bg-slate-500 peer-focus:outline-none rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-zinc-700"
-              ></div>
+            <label class="label">
+              <div class="toggle">
+                <input
+                  class="toggle-state"
+                  type="checkbox"
+                  id="dark_theme_toggle"
+                />
+                <div class="indicator"></div>
+              </div>
             </label>
           </div>
-          <div class="flex items-center justify-between py-4 px-2">
-            <div>
+          <div
+            class="flex items-center justify-between py-4 px-2 gap-4 md:gap-8 flex-col md:flex-row"
+          >
+            <div class="w-full md:w-auto">
               <h3>Difficulty</h3>
               <p class="text-xs text-slate-400 dark:text-zinc-500">
                 Customize the board size and mine count
               </p>
             </div>
             <select
-              id="countries"
-              class="w-64 bg-slate-100 border-[1.5px] border-slate-300 text-sm rounded-lg focus:border-slate-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-slate-400 dark:text-white dark:focus:border-slate-500 appearance-none"
+              id="difficulty_select"
+              class="text-sm rounded-lg block p-2.5 dark:text-zinc-400 appearance-none w-full md:w-64 focus:outline-none"
             >
-              <option selected>Easy (10 x 10, 10 mines)</option>
-              <option value="US">Medium (13 x 15, 40 mines)</option>
-              <option value="CA">Hard (16 x 30, 99 mines)</option>
+              <option value="easy">Easy (10 x 10, 10 mines)</option>
+              <option value="medium">Medium (13 x 15, 40 mines)</option>
+              <option value="hard">Hard (16 x 30, 99 mines)</option>
             </select>
           </div>
         </div>
+      </div>
+      <div
+        id="chatgpt_modal"
+        class="modal overflow-scroll max-h-[70vh] flex flex-col gap-4 p-4 sm:p-8 w-3/4 xl:w-1/2 fixed top-1/2 -left-full -translate-x-1/2 shadow-2xl -translate-y-1/2 dark:bg-zinc-800 rounded-xl"
+      >
+        <div class="w-full flex items-center justify-between">
+          <h2 class="flex gap-2 sm:gap-4 items-center">
+            <span class="mgc_openai_fill icon text-3xl"></span>
+            <div class="flex flex-col gap-2 sm:gap-0">
+              <span class="text-lg">How This Game is Made</span>
+              <span class="text-xs -mt-1">with OpenAI chat-GPT</span>
+            </div>
+          </h2>
+          <button id="chat_gpt_close_button" class="p-4">
+            <span class="mgc_close_fill icon text-xl"></span>
+          </button>
+        </div>
+        <img src="/chatgpt.png" class="rounded-md" />
       </div>
       <div
         id="toast-default"
@@ -189,6 +226,6 @@
       </div>
     </div>
 
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

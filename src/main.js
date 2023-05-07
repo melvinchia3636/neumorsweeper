@@ -177,9 +177,9 @@ class Settings {
   constructor(board) {
     this.theme = localStorage.getItem('theme') || 'light';
     this.difficulty =
-      window.innerWidth >= 530
+      (window.innerWidth >= 530
         ? localStorage.getItem('difficulty')
-        : 'easy' || 'easy';
+        : 'easy') || 'easy';
     this.board = board;
 
     Object.assign(this, DIFFICULTY[this.difficulty.toUpperCase()]);
